@@ -28,9 +28,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Environment Variable
-        id: vars
-        run: echo "::set-output name=build_version::$(git describe --tags)"
       -
         name: Build and push
         id: docker_build
@@ -44,7 +41,6 @@ jobs:
             linux/amd64
           tags: |
             adams549659584/cloudflared:latest
-            adams549659584/cloudflared:${{ steps.vars.outputs.build_version }}
           push: true
       -
         name: Image digest
